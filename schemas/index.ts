@@ -1,22 +1,26 @@
-import * as Z from "zod";
+import * as z from "zod";
 
-export const LoginSchema = Z.object({
-    email: Z.string().email({
+export const LoginSchema = z.object({
+    email: z.string().email({
         message: "Email is required",
     }),
-    password: Z.string().min(1, {
+    password: z.string().min(1, {
         message: "Password is required",
     }),
 })
 
-export const RegisterSchemas = Z.object({
-    email: Z.string().email({
-        message: "Email is required",
+export const RegisterSchemas = z.object({
+    email: z.string().email({
+        message: "Email is required!",
     }),
-    password: Z.string().min(6, {
-        message: "Minimum 6 characters required",
+    password: z.string()
+        .min(6, {
+            message: "Minimum 6 characters required!",
+        })
+        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/, {
+            message: "Password must be strong: At least one uppercase letter, one lowercase letter, one number, and one special character",
+        }),
+    name: z.string().min(1, {
+        message: "Name is required!",
     }),
-    name: Z.string().min(1, {
-        message: "Name is required",
-    }),
-})
+});
