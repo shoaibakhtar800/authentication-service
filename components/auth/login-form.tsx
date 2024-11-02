@@ -49,7 +49,7 @@ const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      login(values, callbackUrl).then((data) => {
+      login(values).then((data) => {
         if (data?.error) {
           form.reset();
           setError(data.error);
